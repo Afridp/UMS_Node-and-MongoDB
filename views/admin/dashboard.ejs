@@ -1,0 +1,57 @@
+<%- include('../layouts/header.ejs') -%>
+
+<div class="container mt-5">
+    <h1>Dashboard</h1>
+
+    <div class="form-group search-container  " >
+        <div class="input-group mt-3" >
+          <form class="d-flex  justify-content-right align-items-right mb-4 input-group-append w-100">
+            <input
+              type="text"
+              class="search-input "
+              id="search"
+              name="search"
+              placeholder="Search"
+            />
+            <button class="btn btn-primary" type="submit" value="searchValue">
+              <b>Search</b>
+            </button>
+          </form>
+
+    <a href="/admin/new-user" class="btn btn-primary mt-3">Add New User</a>
+    <br><br>
+
+    <table class="table custom-table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Action</th>
+        </tr>
+
+        <% if (users.length > 0) {
+            for (let i = 0; i < users.length; i++) { %>
+                <tr>
+                    <td><%= users[i].name %></td>
+                    <td><%= users[i].email %></td>
+                    <td><%= users[i].mobile %></td>
+                    <td>
+                        <a href="/admin/edit-user?id=<%= users[i]._id %>" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/admin/delete-user?id=<%= users[i]._id %>" class="btn btn-danger btn-sm" 
+                            onclick="return confirm(' Delete <%= users[i].name %>?')">Delete User</a>
+                    </td>
+                </tr>
+            <% }
+        } else { %>
+            <tr>
+                <td colspan="4">Users Not Found</td>
+            </tr>
+        <% } %>
+    </table>
+    <br>
+
+    <a href="/admin/home" class="btn btn-primary">Go To Home</a>
+</div>
+
+
+<%- include('../layouts/footer.ejs') -%>

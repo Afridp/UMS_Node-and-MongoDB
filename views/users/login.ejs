@@ -1,0 +1,36 @@
+<%- include('../layouts/header.ejs')-%>
+
+<style>
+    .container {
+        background-image: url('/U_M_S/public/assets/pexels-kei-scampa-4894421.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+
+<div class="container mt-3">
+    <h1>Login</h1>
+
+    <% if(typeof message !== 'undefined') { %>
+        <div class="alert alert-danger mt-3"><%= message %></div>
+    <% } %>
+
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" placeholder="Enter Email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+    </form>
+</div>
+
+
+    
+
+
+<%- include('../layouts/footer.ejs') -%>

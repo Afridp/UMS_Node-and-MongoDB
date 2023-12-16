@@ -1,0 +1,103 @@
+<%- include('../layouts/header.ejs') -%>
+
+<div class="container mt-5">
+    <h1>Edit User</h1>
+
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Enter Name" value="<%= user.name %>" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Enter Email" value="<%= user.email %>" required>
+        </div>
+        <div class="form-group">
+            <label for="mno">Mobile</label>
+            <input type="text" class="form-control" name="mno" placeholder="Enter Mobile" value="<%= user.mobile %>" required>
+        </div>
+        <input type="hidden" name="id" value="<%= user._id %>">
+        <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+
+    <a href="/admin" class="btn btn-primary mt-3">Go To Home</a>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var nameInput = document.querySelector('input[name="name"]');
+        var emailInput = document.querySelector('input[name="email"]');
+        var mobileInput = document.querySelector('input[name="mno"]');
+        // var passwordInput = document.querySelector('input[name="password"]');
+        var registerButton = document.querySelector('button[type="submit"]');
+
+        nameInput.addEventListener('blur', function() {
+            validateName();
+        });
+
+        emailInput.addEventListener('blur', function() {
+            validateEmail();
+        });
+
+        mobileInput.addEventListener('blur', function() {
+            validateMobile();
+        });
+
+        // passwordInput.addEventListener('blur', function() {
+        //     validatePassword();
+        // });
+
+        function validateName() {
+            var name = nameInput.value.trim();
+            if (name === '') {
+                nameInput.setCustomValidity('Name is required');
+            } else if (!/^[a-zA-Z]+$/.test(name)) {
+                nameInput.setCustomValidity('Name can only contain letters');
+            } else {
+                nameInput.setCustomValidity('');
+            }
+        }
+
+        function validateEmail() {
+            var email = emailInput.value.trim();
+            if (email === '') {
+                emailInput.setCustomValidity('Email is required');
+            } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
+                emailInput.setCustomValidity('Invalid email format');
+            } else {
+                emailInput.setCustomValidity('');
+            }
+        }
+
+        function validateMobile() {
+            var mobile = mobileInput.value.trim();
+            if (mobile === '') {
+                mobileInput.setCustomValidity('Mobile is required');
+            } else if (!/^\d{10}$/.test(mobile)) {
+                mobileInput.setCustomValidity('Mobile can only contain digits');
+            } else {
+                mobileInput.setCustomValidity('');
+            }
+        }
+
+        // function validatePassword() {
+        //     var password = passwordInput.value.trim();
+        //     if (password === '') {
+        //         passwordInput.setCustomValidity('Password is required');
+        //     } else {
+        //         passwordInput.setCustomValidity('');
+        //     }
+        // }
+
+        registerButton.addEventListener('click', function() {
+            validateName();
+            validateEmail();
+            validateMobile();
+            validatePassword();
+        });
+    });
+</script>
+
+
+<%- include('../layouts/footer.ejs') -%>
